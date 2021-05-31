@@ -3,12 +3,49 @@
  */
 package Exercise;
 
+import Exercise.commands.CommandFactory;
+import Exercise.commands.ICommand;
+import Exercise.console.Console;
+import Exercise.console.IConsole;
+
+import java.util.LinkedList;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+
+        IConsole cnsl = new Console();
+        LinkedList<ICommand> cmds = new CommandFactory(cnsl).returnCommands();
+
+        while (true) {
+            cnsl.write(createMenu(cmds));
+            int n = cnsl.readInteger("Please enter a number for an option:");
+            if (n >= 0 && n < cmds.size()) {
+                cmds.get(n).execute();
+            } else {
+                cnsl.write(String.format("%s option not found", n));
+            }
+        }
     }
+
+    /**
+     * Creates Menu with options
+     *
+     * @param cmds List of executeable Commands
+     * @return inteface string
+     */
+    private static String createMenu(LinkedList<ICommand> cmds) {
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Console-Application: Exercise-1                          Florian Symmank 578767\n");
+        sb.append("\n");
+
+        for (int i = 1; i < cmds.size(); i++) {
+            sb.append(String.format("%s. %s \n", i, cmds.get(i).toString()));
+        }
+
+        sb.append("0. " + cmds.get(0).toString() + "\n");
+        return sb.toString();
+    }
+}
 }
