@@ -86,7 +86,7 @@ public class SinglyLinkedList<T> implements IListable<T> {
      *
      * @param index index of the element to return
      * @return the element at the specified position in this list
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index >= size())
+     * @throws IndexOutOfBoundsException if the index is out of range (index &lt; 0 || index &ge; size())
      */
     @Override
     public T get(int index) throws IndexOutOfBoundsException {
@@ -102,21 +102,16 @@ public class SinglyLinkedList<T> implements IListable<T> {
     }
 
     /**
-     * Replaces the element at the specified position in this list with the specified element. If specified position would be next to add data WILL BE added.
+     * Replaces the element at the specified position in this list with the specified element.
      *
      * @param index index of the element to replace
      * @param data  element to be stored at the specified position
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index > size())
+     * @throws IndexOutOfBoundsException if the index is out of range (index &lt; 0 || index &ge; size())
      */
     @Override
     public void set(int index, T data) throws IndexOutOfBoundsException {
-        if (index < 0 || index > size())
+        if (index < 0 || index >= size())
             throw new IndexOutOfBoundsException();
-
-        if (index == size()) {
-            add(data);
-            return;
-        }
 
         Node curr = head;
         for (int i = 0; i <= index; i++) {
@@ -130,7 +125,7 @@ public class SinglyLinkedList<T> implements IListable<T> {
      * Removes the element at the specified position in this list. Shifts any subsequent elements to the left (subtracts one from their indices)
      *
      * @param index the index of the element to be removed
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index >= size())
+     * @throws IndexOutOfBoundsException if the index is out of range (index &lt; 0 || index &ge; size())
      */
     @Override
     public void remove(int index) throws IndexOutOfBoundsException {
