@@ -1,6 +1,9 @@
 package Exercise.lists;
 
 public class DoublyLinkedList<T> implements IListable<T> {
+
+    //TODO: implement DoublyLinkedList<T>
+
     @Override
     public void add(T data) {
 
