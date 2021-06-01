@@ -8,6 +8,7 @@ import Exercise.commands.ICommand;
 import Exercise.console.Console;
 import Exercise.console.IConsole;
 import Exercise.data.Student;
+import Exercise.lists.IListable;
 import Exercise.lists.SinglyLinkedList;
 
 import java.util.LinkedList;
@@ -16,35 +17,20 @@ public class App {
 
     public static void main(String[] args) {
 
-        SinglyLinkedList<Student> sll = new SinglyLinkedList<>();
-        Student s1 = new Student("0", "", 0, 0);
-        sll.set(0, s1);
-        Student s2 = new Student("1", "", 0, 0);
-        sll.add(s2);
-        System.out.println(sll.toString());
-//        Student s3 = new Student("2", "", 0, 0);
-//        sll.add(s3);
 
+        IConsole cnsl = new Console();
+        IListable<Student> list = new SinglyLinkedList<Student>();
+        LinkedList<ICommand> cmds = new CommandFactory(cnsl, list).returnCommands();
 
-//        System.out.println(sll.get(0).toString());
-//        System.out.println(sll.get(1).toString());
-//        System.out.println(sll.get(2).toString());
-//        sll.remove(2);
-//        System.out.println(sll.get(2));
-        System.out.println("aa");
-
-//        IConsole cnsl = new Console();
-//        LinkedList<ICommand> cmds = new CommandFactory(cnsl).returnCommands();
-//
-//        while (true) {
-//            cnsl.write(createMenu(cmds));
-//            int n = cnsl.readInteger("Please enter a number for an option:");
-//            if (n >= 0 && n < cmds.size()) {
-//                cmds.get(n).execute();
-//            } else {
-//                cnsl.write(String.format("%s option not found", n));
-//            }
-//        }
+        while (true) {
+            cnsl.write(createMenu(cmds));
+            int n = cnsl.readInteger("Please enter a number for an option:");
+            if (n >= 0 && n < cmds.size()) {
+                cmds.get(n).execute();
+            } else {
+                cnsl.write(String.format("%s option not found", n));
+            }
+        }
     }
 
     /**
