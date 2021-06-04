@@ -1,5 +1,6 @@
-package Exercise.commands;
+package Exercise.commands.sort;
 
+import Exercise.commands.ICommand;
 import Exercise.console.IConsole;
 import Exercise.data.Student;
 import Exercise.lists.IListable;
