@@ -58,6 +58,9 @@ public class Student {
         this.matriculationNumber = matriculationNumber;
     }
 
+    public Student() {
+    }
+
     public String getPrename() {
         return prename;
     }
