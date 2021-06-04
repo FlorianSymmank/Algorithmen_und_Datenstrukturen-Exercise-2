@@ -82,6 +82,16 @@ public class SinglyLinkedList<T> implements IListable<T> {
     }
 
     /**
+     * Appends the specified element to the end of this list
+     *
+     * @param data element to be appended to this list
+     */
+    @Override
+    public void addLast(T data) throws IndexOutOfBoundsException{
+        add(data);
+    }
+
+    /**
      * Returns the element at the specified position in this list.
      *
      * @param index index of the element to return
@@ -159,6 +169,15 @@ public class SinglyLinkedList<T> implements IListable<T> {
     @Override
     public int size() {
         return itemCount;
+    }
+
+    /**
+     * Returns if the list is empty.
+     * @return if the list is empty.
+     */
+    @Override
+    public boolean isEmpty() {
+        return size() == 0;
     }
 
     /**

@@ -20,6 +20,11 @@ public class DoublyLinkedList<T> implements IListable<T> {
     }
 
     @Override
+    public void addLast(T data) {
+
+    }
+
+    @Override
     public T get(int index) {
         return null;
     }
@@ -42,5 +47,10 @@ public class DoublyLinkedList<T> implements IListable<T> {
     @Override
     public int size() {
         return 0;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
     }
 }
