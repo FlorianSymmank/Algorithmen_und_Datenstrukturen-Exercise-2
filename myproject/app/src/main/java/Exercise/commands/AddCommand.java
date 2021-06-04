@@ -28,7 +28,6 @@ public class AddCommand implements ICommand {
 
     @Override
     public String toString() {
-        //TODO: Add Text description
-        return "";
+        return "Add Student to the end of this list.";
     }
 }
