@@ -1,6 +1,50 @@
 package Exercise.data;
 
+import Exercise.sort.IComparator;
+
 public class Student {
+
+    public final static IComparator<Student> PrenameComparator = new IComparator<Student>() {
+        @Override
+        public int compare(Student o1, Student o2) {
+            if (o1.prename == null && o2.prename == null) {
+                return 0;
+            } else if (o1.prename == null) {
+                return 1;
+            } else if (o2.prename == null) {
+                return -1;
+            }
+            return o1.prename.compareTo(o2.prename);
+        }
+    };
+
+    public final static IComparator<Student> SurnameComparator = new IComparator<Student>() {
+        @Override
+        public int compare(Student o1, Student o2) {
+            if (o1.surname == null && o2.surname == null) {
+                return 0;
+            } else if (o1.surname == null) {
+                return 1;
+            } else if (o2.surname == null) {
+                return -1;
+            }
+            return o1.surname.compareTo(o2.surname);
+        }
+    };
+
+    public final static IComparator<Student> CourseComparator = new IComparator<Student>() {
+        @Override
+        public int compare(Student o1, Student o2) {
+            return o1.course - o2.course;
+        }
+    };
+
+    public final static IComparator<Student> MatriculationNumberComparator = new IComparator<Student>() {
+        @Override
+        public int compare(Student o1, Student o2) {
+            return o1.matriculationNumber - o2.matriculationNumber;
+        }
+    };
 
     private String prename;
     private String surname;

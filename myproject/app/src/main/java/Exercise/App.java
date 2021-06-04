@@ -10,6 +10,7 @@ import Exercise.console.IConsole;
 import Exercise.data.Student;
 import Exercise.lists.IListable;
 import Exercise.lists.SinglyLinkedList;
+import Exercise.sort.SelectionSort;
 
 import java.util.LinkedList;
 
@@ -17,20 +18,46 @@ public class App {
 
     public static void main(String[] args) {
 
+        Student s1 = new Student("Hannes", "Dieter", 1 , 3);
+        Student s2 = new Student("Udo", "Klaus", 7 , 5);
+        Student s3 = new Student("Peter", "Maus", 12 , 1);
+        Student s4 = new Student("Jannis", "Paul", -1 , 147);
 
-        IConsole cnsl = new Console();
-        IListable<Student> list = new SinglyLinkedList<Student>();
-        LinkedList<ICommand> cmds = new CommandFactory(cnsl, list).returnCommands();
+        SinglyLinkedList<Student> sll = new SinglyLinkedList<>();
+        sll.add(s1);
+        sll.add(s2);
+        sll.add(s3);
+        sll.add(s4);
 
-        while (true) {
-            cnsl.write(createMenu(cmds));
-            int n = cnsl.readInteger("Please enter a number for an option:");
-            if (n >= 0 && n < cmds.size()) {
-                cmds.get(n).execute();
-            } else {
-                cnsl.write(String.format("%s option not found", n));
-            }
-        }
+        new SelectionSort<Student>().sort(sll, Student.CourseComparator);
+        System.out.println(sll.toString());
+        System.out.println("");
+
+        new SelectionSort<Student>().sort(sll, Student.MatriculationNumberComparator);
+        System.out.println(sll.toString());
+        System.out.println("");
+
+        new SelectionSort<Student>().sort(sll, Student.PrenameComparator);
+        System.out.println(sll.toString());
+        System.out.println("");
+
+        new SelectionSort<Student>().sort(sll, Student.SurnameComparator);
+        System.out.println(sll.toString());
+        System.out.println("");
+
+//        IConsole cnsl = new Console();
+//        IListable<Student> list = new SinglyLinkedList<Student>();
+//        LinkedList<ICommand> cmds = new CommandFactory(cnsl, list).returnCommands();
+//
+//        while (true) {
+//            cnsl.write(createMenu(cmds));
+//            int n = cnsl.readInteger("Please enter a number for an option:");
+//            if (n >= 0 && n < cmds.size()) {
+//                cmds.get(n).execute();
+//            } else {
+//                cnsl.write(String.format("%s option not found", n));
+//            }
+//        }
     }
 
     /**
