@@ -4,12 +4,12 @@ import Exercise.console.IConsole;
 import Exercise.data.Student;
 import Exercise.lists.IListable;
 
-public class ReadStudentCommands implements ICommand {
+public class ReadStudentCommand implements ICommand {
 
     private final IConsole cnsl;
     private Student student;
 
-    public ReadStudentCommands(IConsole cnsl, Student student) {
+    public ReadStudentCommand(IConsole cnsl, Student student) {
         this.cnsl = cnsl;
         this.student = student;
     }
