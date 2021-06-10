@@ -12,17 +12,19 @@ import Exercise.lists.IListable;
 import Exercise.lists.SinglyLinkedList;
 
 import java.util.LinkedList;
+import java.util.function.Predicate;
 
 public class App {
 
     public static void main(String[] args) {
+
         IConsole cnsl = new Console();
         IListable<Student> list = new SinglyLinkedList<Student>();
         LinkedList<ICommand> cmds = new CommandFactory(cnsl, list).returnCommands();
 
-        Student s1 = new Student("Hannes", "Dieter", 5 , 3);
+        Student s1 = new Student("Hannes", "Dieter", 5, 3);
         Student s2 = new Student("Peter", "Udo", 7, 1);
-        Student s3 = new Student("Maus", "Klaus", 1, 2);
+        Student s3 = new Student("Maus", "Klaus", 4, 2);
         Student s4 = new Student("Yannik", "Torsten", 4, 4);
 
         list.add(s1);
