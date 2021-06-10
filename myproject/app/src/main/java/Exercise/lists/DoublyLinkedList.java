@@ -1,5 +1,7 @@
 package Exercise.lists;
 
+import java.util.function.Predicate;
+
 public class DoublyLinkedList<T> implements IListable<T> {
 
     //TODO: implement DoublyLinkedList<T>
@@ -52,5 +54,10 @@ public class DoublyLinkedList<T> implements IListable<T> {
     @Override
     public boolean isEmpty() {
         return false;
+    }
+
+    @Override
+    public IListable<T> filter(Predicate<T> predicate) {
+        return null;
     }
 }

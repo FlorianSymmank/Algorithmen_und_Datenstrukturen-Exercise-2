@@ -1,5 +1,7 @@
 package Exercise.lists;
 
+import java.util.function.Predicate;
+
 public interface IListable<T> {
     void add(T data);
     void add(int index, T data);
@@ -11,4 +13,5 @@ public interface IListable<T> {
     void clear();
     int size();
     boolean isEmpty();
+    IListable<T> filter(Predicate<T> predicate);
 }

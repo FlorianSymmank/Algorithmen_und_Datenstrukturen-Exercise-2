@@ -1,5 +1,7 @@
 package Exercise.lists;
 
+import java.util.function.Predicate;
+
 public class SinglyLinkedList<T> implements IListable<T> {
 
     /**
@@ -87,7 +89,7 @@ public class SinglyLinkedList<T> implements IListable<T> {
      * @param data element to be appended to this list
      */
     @Override
-    public void addLast(T data) throws IndexOutOfBoundsException{
+    public void addLast(T data) throws IndexOutOfBoundsException {
         add(data);
     }
 
@@ -173,6 +175,7 @@ public class SinglyLinkedList<T> implements IListable<T> {
 
     /**
      * Returns if the list is empty.
+     *
      * @return if the list is empty.
      */
     @Override
@@ -197,5 +200,25 @@ public class SinglyLinkedList<T> implements IListable<T> {
         }
 
         return sb.toString();
+    }
+
+    /**
+     * Searches through list and finds all elements with mating pattern.
+     * @param predicate The pattern to be searched.
+     * @return filtered SinglyLinkedList with all elements from the original list with matching pattern.
+     */
+    public IListable<T> filter(Predicate<T> predicate) {
+
+        SinglyLinkedList<T> filteredList = new SinglyLinkedList<>();
+        Node tmp = head.next;
+
+        while (tmp.next != null) {
+            if (predicate.test(tmp.data)) {
+                filteredList.add(tmp.data);
+            }
+            tmp = tmp.next;
+        }
+
+        return filteredList;
     }
 }
