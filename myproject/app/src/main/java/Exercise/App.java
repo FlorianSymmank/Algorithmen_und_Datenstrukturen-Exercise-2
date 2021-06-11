@@ -8,6 +8,7 @@ import Exercise.commands.ICommand;
 import Exercise.console.Console;
 import Exercise.console.IConsole;
 import Exercise.data.Student;
+import Exercise.lists.DoublyLinkedList;
 import Exercise.lists.IListable;
 import Exercise.lists.SinglyLinkedList;
 
@@ -19,7 +20,7 @@ public class App {
     public static void main(String[] args) {
 
         IConsole cnsl = new Console();
-        IListable<Student> list = new SinglyLinkedList<Student>();
+        IListable<Student> list = chooseList(cnsl);
         LinkedList<ICommand> cmds = new CommandFactory(cnsl, list).returnCommands();
 
         Student s1 = new Student("Hannes", "Dieter", 5, 3);
@@ -32,8 +33,9 @@ public class App {
         list.add(s3);
         list.add(s4);
 
+
         while (true) {
-            cnsl.write(createMenu(cmds));
+            cnsl.write(createMenu(cmds, list.getClass()));
             int n = cnsl.readInteger("Please enter a number for an option:");
             if (n >= 0 && n < cmds.size()) {
                 cmds.get(n).execute();
@@ -47,12 +49,15 @@ public class App {
      * Creates Menu with options
      *
      * @param cmds List of executeable Commands
+     * @param type
      * @return inteface string
      */
-    private static String createMenu(LinkedList<ICommand> cmds) {
+    private static String createMenu(LinkedList<ICommand> cmds, Class<? extends IListable> type) {
 
         StringBuilder sb = new StringBuilder();
-        sb.append("Console-Application: Exercise-1                          Florian Symmank 578767\n");
+        sb.append("Console-Application: Exercise-2                          Florian Symmank 578767\n");
+        sb.append("\n");
+        sb.append("You selected " + type.getSimpleName() + "\n");
         sb.append("\n");
 
         for (int i = 1; i < cmds.size(); i++) {
@@ -61,5 +66,33 @@ public class App {
 
         sb.append("0. " + cmds.get(0).toString() + "\n");
         return sb.toString();
+    }
+
+    private static IListable<Student> chooseList(IConsole cnsl) {
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Console-Application: Exercise-2                          Florian Symmank 578767\n");
+        sb.append("\n");
+
+        sb.append("1. SinglyLinkedList\n");
+        sb.append("2. DoublyLinkedList\n");
+
+        cnsl.write(sb.toString());
+
+        while (true) {
+            int option = cnsl.readInteger("Please enter a number for an option:");
+
+            switch (option) {
+
+                case 1:
+                    return new SinglyLinkedList<Student>();
+                case 2:
+                    return new DoublyLinkedList<Student>();
+
+                default:
+                    cnsl.write("Option " + option + "is not available");
+                    break;
+            }
+        }
     }
 }
