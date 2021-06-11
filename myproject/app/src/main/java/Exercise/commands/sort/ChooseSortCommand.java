@@ -4,6 +4,7 @@ import Exercise.commands.ICommand;
 import Exercise.console.IConsole;
 import Exercise.data.Student;
 import Exercise.lists.IListable;
+import Exercise.sort.HeapSort;
 import Exercise.sort.ISortable;
 import Exercise.sort.SelectionSort;
 
@@ -25,13 +26,17 @@ public class ChooseSortCommand implements ICommand {
             cnsl.write("Select a sorting method for sorting:");
             cnsl.write("");
             cnsl.write("1. Selectionsort");
-            // TODO: add sort algos
+            cnsl.write("2. Heapsort");
+
             cnsl.write("");
 
             int option = cnsl.readInteger("Please enter a number for an option:");
             switch (option){
                 case 1:
                     sort = new SelectionSort<Student>();
+                    break;
+                case 2:
+                    sort = new HeapSort<Student>();
                     break;
                 default:
                     cnsl.write("Option: " + option + " not available.");
