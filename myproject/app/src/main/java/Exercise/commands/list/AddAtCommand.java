@@ -19,8 +19,8 @@ public class AddAtCommand implements ICommand {
     @Override
     public void execute() {
 
+        // get valid index
         int index = -1;
-
         while (index < 0 || index > list.size()) {
             index = cnsl.readInteger("Enter index at which the student is to be inserted (0 - " + list.size() + "): ");
         }

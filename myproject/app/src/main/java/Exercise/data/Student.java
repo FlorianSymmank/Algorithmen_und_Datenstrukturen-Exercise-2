@@ -35,7 +35,7 @@ public class Student {
     public final static IComparator<Student> CourseComparator = new IComparator<Student>() {
         @Override
         public int compare(Student o1, Student o2) {
-            return o1.course - o2.course;
+            return o1.course.ordinal() - o2.course.ordinal();
         }
     };
 
@@ -46,12 +46,31 @@ public class Student {
         }
     };
 
+    public enum Course {
+        AI,
+        BWL,
+        CE,
+        FM,
+        ID;
+
+        public static String getAllOptionsString() {
+            String options = "";
+            for (var value : Course.values())
+                options += value.name() + "(" + value.ordinal() + ")" + ", ";
+            return options.substring(0, options.length() - 2);
+        }
+
+        public static boolean isValidNumber(int n) {
+            return n >= 0 && n < Course.values().length;
+        }
+    }
+
     private String prename;
     private String surname;
-    private int course;
+    private Course course;
     private int matriculationNumber;
 
-    public Student(String prename, String surname, int course, int matriculationNumber) {
+    public Student(String prename, String surname, Course course, int matriculationNumber) {
         this.prename = prename;
         this.surname = surname;
         this.course = course;
@@ -77,11 +96,11 @@ public class Student {
         this.surname = surname;
     }
 
-    public int getCourse() {
+    public Course getCourse() {
         return course;
     }
 
-    public void setCourse(int course) {
+    public void setCourse(Course course) {
         this.course = course;
     }
 
@@ -98,7 +117,7 @@ public class Student {
         return "Student {" +
                 "prename='" + prename + '\'' +
                 ", surname='" + surname + '\'' +
-                ", course=" + course +
+                ", course=" + course.name() +
                 ", matriculationNumber=" + matriculationNumber +
                 '}';
     }

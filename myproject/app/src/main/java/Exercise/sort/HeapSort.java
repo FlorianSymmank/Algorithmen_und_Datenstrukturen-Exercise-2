@@ -7,18 +7,17 @@ public class HeapSort<T> extends SortBase<T> {
     @Override
     public void sort(IListable<T> list, IComparator<T> comparator) {
         int n = list.size();
-
-        // Build heap
-        for (int i = n / 2 - 1; i >= 0; i--)
-            heapify(list, n, i, comparator);
-
-        // One by one extract an element from heap
+        buildHeap(list, comparator);
         for (int i = n - 1; i > 0; i--) {
             swap(list, 0, i);
-
-            // call max heapify on the reduced heap
             heapify(list, i, 0, comparator);
         }
+    }
+
+    private void buildHeap(IListable<T> list, IComparator<T> comparator) {
+        int n = list.size();
+        for (int i = n / 2 - 1; i >= 0; i--)
+            heapify(list, n, i, comparator);
     }
 
     private void heapify(IListable<T> list, int n, int i, IComparator<T> comparator) {
@@ -26,12 +25,12 @@ public class HeapSort<T> extends SortBase<T> {
         int l = 2 * i + 1; // left = 2*i + 1
         int r = 2 * i + 2; // right = 2*i + 2
 
-        // If left child is larger than root
+        // left child is larger
         if (l < n && comparator.compare(list.get(l), list.get(largest)) > 0)
             largest = l;
 
-        // If right child is larger than largest so far
-        if (r < n &&  comparator.compare(list.get(r), list.get(largest)) > 0)
+        // right child is larger
+        if (r < n && comparator.compare(list.get(r), list.get(largest)) > 0)
             largest = r;
 
         if (largest != i) {

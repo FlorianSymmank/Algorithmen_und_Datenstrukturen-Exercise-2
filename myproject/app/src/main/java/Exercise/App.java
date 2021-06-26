@@ -13,7 +13,6 @@ import Exercise.lists.IListable;
 import Exercise.lists.SinglyLinkedList;
 
 import java.util.LinkedList;
-import java.util.function.Predicate;
 
 public class App {
 
@@ -22,17 +21,6 @@ public class App {
         IConsole cnsl = new Console();
         IListable<Student> list = chooseList(cnsl);
         LinkedList<ICommand> cmds = new CommandFactory(cnsl, list).returnCommands();
-
-        Student s1 = new Student("Hannes", "Dieter", 5, 3);
-        Student s2 = new Student("Peter", "Udo", 7, 1);
-        Student s3 = new Student("Maus", "Klaus", 4, 2);
-        Student s4 = new Student("Yannik", "Torsten", 4, 4);
-
-        list.add(s1);
-        list.add(s2);
-        list.add(s3);
-        list.add(s4);
-
 
         while (true) {
             cnsl.write(createMenu(cmds, list.getClass()));
@@ -52,12 +40,14 @@ public class App {
      * @param type
      * @return inteface string
      */
-    private static String createMenu(LinkedList<ICommand> cmds, Class<? extends IListable> type) {
+    private static String createMenu(LinkedList<ICommand> cmds, Class type) {
+
+        // Class<? extends IListable> type
 
         StringBuilder sb = new StringBuilder();
         sb.append("Console-Application: Exercise-2                          Florian Symmank 578767\n");
         sb.append("\n");
-        sb.append("You selected " + type.getSimpleName() + "\n");
+        sb.append("You selected '" + type.getSimpleName() + "'\n");
         sb.append("\n");
 
         for (int i = 1; i < cmds.size(); i++) {
@@ -90,7 +80,7 @@ public class App {
                     return new DoublyLinkedList<Student>();
 
                 default:
-                    cnsl.write("Option " + option + "is not available");
+                    cnsl.write("Option " + option + " is not available");
                     break;
             }
         }

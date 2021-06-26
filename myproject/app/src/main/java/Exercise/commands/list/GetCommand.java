@@ -17,8 +17,9 @@ public class GetCommand implements ICommand {
 
     @Override
     public void execute() {
-        int index = -1;
 
+        // get valid index
+        int index = -1;
         while (index < 0 || index > list.size()) {
             index = cnsl.readInteger("Enter index of the student to return (0 - " + list.size() + "): ");
         }

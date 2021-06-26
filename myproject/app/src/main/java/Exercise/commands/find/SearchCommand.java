@@ -10,7 +10,6 @@ import java.util.function.Predicate;
 
 public class SearchCommand implements ICommand {
 
-
     private final IConsole cnsl;
     private final IListable<Student> list;
 
@@ -33,7 +32,7 @@ public class SearchCommand implements ICommand {
             cnsl.write("");
 
             int option = cnsl.readInteger("Please enter a number for an option:");
-            switch (option){
+            switch (option) {
                 case 1:
                     String prename = cnsl.readString("Please enter prename for the search:");
                     predicate = new Predicate<Student>() {
@@ -53,13 +52,21 @@ public class SearchCommand implements ICommand {
                     };
                     break;
                 case 3:
-                    int courseNumber = cnsl.readInteger("Please enter course number for the search:");
+
+                    // get valid course number
+                    int courseNumber = -1;
+                    while (!Student.Course.isValidNumber(courseNumber)){
+                        courseNumber = cnsl.readInteger("Please enter course number for the search (Options: " + Student.Course.getAllOptionsString() + "):");
+                    }
+
+                    Student.Course course = Student.Course.values()[courseNumber];
                     predicate = new Predicate<Student>() {
                         @Override
                         public boolean test(Student student) {
-                            return student.getCourse() == courseNumber;
+                            return student.getCourse() == course;
                         }
                     };
+
                     break;
                 case 4:
                     int matriculationNumber = cnsl.readInteger("Please enter matriculation number for the search:");

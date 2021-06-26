@@ -22,7 +22,8 @@ public class SortCommand implements ICommand {
 
     @Override
     public void execute() {
-// Get all fields in type of type IComparator via reflection
+
+// Get all fields in class of type IComparator via reflection
 //        try {
 //            for (Field field : Student.class.getDeclaredFields())
 //                if (field.getType() == IComparator.class)

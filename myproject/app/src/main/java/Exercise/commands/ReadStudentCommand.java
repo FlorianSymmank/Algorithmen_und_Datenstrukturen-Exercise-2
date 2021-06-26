@@ -2,7 +2,6 @@ package Exercise.commands;
 
 import Exercise.console.IConsole;
 import Exercise.data.Student;
-import Exercise.lists.IListable;
 
 public class ReadStudentCommand implements ICommand {
 
@@ -18,7 +17,14 @@ public class ReadStudentCommand implements ICommand {
     public void execute() {
         student.setPrename(cnsl.readString("Please enter prename:"));
         student.setSurname(cnsl.readString("Please enter surname:"));
-        student.setCourse(cnsl.readInteger("Please enter course number:"));
+
+        // get valid course number
+        int courseNumber = -1;
+        while (!Student.Course.isValidNumber(courseNumber)) {
+            courseNumber = cnsl.readInteger("Please enter course number (Options: " + Student.Course.getAllOptionsString() + "):");
+        }
+        student.setCourse(Student.Course.values()[courseNumber]);
+
         student.setMatriculationNumber(cnsl.readInteger("Please enter matriculation number:"));
     }
 }

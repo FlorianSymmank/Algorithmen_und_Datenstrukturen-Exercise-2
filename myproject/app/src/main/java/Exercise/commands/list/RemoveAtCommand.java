@@ -17,8 +17,9 @@ public class RemoveAtCommand implements ICommand {
 
     @Override
     public void execute() {
-        int index = -1;
 
+        // get valid index
+        int index = -1;
         while (index < 0 || index > list.size()) {
             index = cnsl.readInteger("Enter the index of the student to be removed (0 - " + list.size() + "): ");
         }

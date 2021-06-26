@@ -4,6 +4,7 @@ import Exercise.lists.IListable;
 
 public class SelectionSort<T> extends SortBase<T>{
 
+
     @Override
     public void sort(IListable<T> list, IComparator<T> comparator) {
         int minimum;
